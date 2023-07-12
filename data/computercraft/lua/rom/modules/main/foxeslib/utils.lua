@@ -2,12 +2,12 @@ local module = {}
 
 module.doorHandler = function(channel, name, side)
   --USE ONLY WITH ONE MODEM!
-  modem = peripheral.find('modem')
+  local modem = peripheral.find('modem')
   modem.open(channel)
+  local results = {}
   if type(name) ~= 'table' then
     results = { [tostring(name)] = true }
   else
-    results = {}
     for k, v in pairs(name) do
       if v == true then
         results[k] = true

@@ -25,7 +25,7 @@ tables.step = function(first, last, step)
     first = 1
   end
 
-  results = {}
+  local results = {}
   for n = first, last, step do table.insert(results, n) end
   return results
 end

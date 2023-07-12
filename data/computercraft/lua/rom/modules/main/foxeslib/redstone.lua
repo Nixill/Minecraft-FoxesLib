@@ -25,13 +25,13 @@ end
 
 module.blastRedstone = function(value)
   for _, v in pairs(redstone.getSides()) do
-    redstone.setOutput(value)
+    redstone.setOutput(v, value)
   end
 end
 
 module.blastAnalogRedstone = function(value)
   for _, v in pairs(redstone.getSides()) do
-    redstone.setAnalogOutput(value)
+    redstone.setAnalogOutput(v, value)
   end
 end
 
@@ -39,7 +39,7 @@ module.blastAnalogueRedstone = module.blastAnalogRedstone
 
 module.blastBundledRedstone = function(value)
   for _, v in pairs(redstone.getSides()) do
-    redstone.setBundledOutput(value)
+    redstone.setBundledOutput(v, value)
   end
 end
 
