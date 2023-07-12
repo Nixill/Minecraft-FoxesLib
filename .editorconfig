@@ -1,0 +1,8 @@
+"Lua.format.defaultConfig": {
+  "align_continuous_line_space": "1",
+  "quote_style": "double",
+  "call_arg_parentheses": "remove",
+  "continuation_indent": "2",
+  "insert_final_newline": "false",
+  "align_continuous_inline_comment": "false"
+}
