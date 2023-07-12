@@ -1,0 +1,142 @@
+The following functions are available to tortoise:
+
+
+
+# Main functions
+
+
+## debug
+Returns:
+1. table:
+  * "position": The current position known to the bot
+  * "facing": The current facing direction known to the bot
+  * "gpsSet": which is true iff the tortoise has been calibrated by GPS and not reset.
+
+Remarks:
+Positions are inaccurate if the turtle has been moved with any `turtle.` functions since last reset!
+
+
+## calibrate
+Attempts to calibrate the turtle's position via GPS.
+
+Returns:
+1. boolean:
+  * true iff calibration was successful
+  * false if either variable couldn't be set
+  * nil if both variables were set but the turtle couldn't return to its origin
+2. string: A message explaining the success or failure of the function.
+
+
+## reset
+Resets the turtle's known position and direction.
+
+
+
+# Turn functions
+All turn functions return the number of times the robot turned to the right. Left turns are denoted by a negative number.
+
+
+## turnRight, turnLeft
+Turns the turtle to the right or left.
+
+Note that the turn is taken mod 4, and turning 3 times is translated to 1 in the opposite direction.
+
+Parameters:
+  1. amount - number: The number of times to turn 90°. Defaults to 1.
+
+
+## turnAround
+Turns the turtle around (by turning right twice).
+
+
+## faceRelative
+Faces as close as possible to a relative vector.
+
+If the requested vector has a 45° angle, north or south is prioritized over east or west.
+
+Parameters:
+  1. face - vector: The vector to face
+
+
+## faceNorth, faceSouth, faceEast, faceWest
+Faces in the given direction.
+
+
+## faceBlock
+Faces as close as possible to the specified absolute coordinate. (Coordinates in non-calibrated turtles are relative to last reset or program startup!)
+
+Parameters:
+  1. block - vector: The block to face.
+
+
+# Relative movement functions
+All relative movement functions have the following parameters:
+  1. distance - number: The number of meters to move. Defaults to 1.
+  2. afterMove - function: The function to execute after moving. Optional.
+  3. turnOnEnd - number or string: The number of times to turn on the end or the direction to face. Is evaluated after the turtle makes its last move, but before the afterMove function. Defaults to reset the facing direction to original.
+  4. traverseOffset - number: Arbitrary number to be added to the afterMove function's parameters.
+
+They also have the following return values:
+  1. boolean: Whether or not the *entire* move succeeded.
+  2. number: The number of tiles actually moved.
+  3. number: The robot's orientation relative to the start of the move, in 90° turns to the right.
+  4. string | nil: The reason the move failed, if anything.
+
+
+If one is specified, the afterMove function may take the following parameters:
+  1. traversed - number: The number of tiles traversed so far (plus the traverseOffset, if applicable).
+  2. distance - number: The total number of tiles to traverse (sum of so far and remaining, plus the traverseOffset, if applicable).
+  3. turnOnEnd - number or string: Same as passed to the movement function itself.
+
+And should have the following return values:
+  1. boolean | string | nil: Has one of the following meanings:
+    a. true or nil: Continue the move, if there is more to be done.
+    b. false or "cancel": End the move prematurely with a failure (false) first return value.
+    c. the string "nil": End the move prematurely with an undefined (nil) first return value.
+    d. "finish": End the move prematurely with a successful (true) first return value.
+  2. number: Advance (or retreat) the traversal counter by this much (should be used if the post-move function moves more).
+
+
+## forward, back, up, down
+Moves the turtle without pre-turning it.
+
+
+## moveLeft, moveRight, move180
+Turns the turtle in the given direction, then moves.
+
+
+## moveNorth, moveSouth, moveEast, moveWest
+Turns the turtle to face the given direction, then moves.
+
+
+
+# Absolute movement functions
+All relative movement functions have the following parameters:
+  1. target - number: The target coordinate to reach along the axis.
+  2. afterMove - function: The function to execute after moving. Optional.
+  3. turnOnEnd - number or string: The number of times to turn on the end or the direction to face. Is evaluated after the turtle makes its last move, but before the afterMove function. Defaults to reset the facing direction to original.
+  4. traverseOffset - number: Arbitrary number to be added to the afterMove function's parameters.
+
+They also have the following return values:
+  1. boolean | nil: Whether or not the *entire* move succeeded. `nil` if the move was unnecessary as the turtle is already at the target coordinate.
+  2. number: The number of tiles actually moved.
+  3. number: The robot's orientation relative to the start of the move, in 90° turns to the right.
+  4. string | nil: The reason the move failed, if anything.
+
+The afterMove function has the same parameters and return values as in the "Relative movement functions" section above.
+
+
+
+# Other functions
+
+## selectItem
+Selects the first slot containing a given item, if such an item is contained at all.
+
+Parameters:
+  1. itemName - string: The ID of the item to select. Can also be `"minecraft:air"` or `nil` to select empty slots, or `"*"` to select any non-empty slot.
+  2. minCount - number: The minimum number to select.
+
+Returns:
+  1. boolean: Whether or not a matching slot was found.
+  2. number|nil: The number of the newly selected slot, or nil if no matching slot was found.
+  3. number: The number of the previously selected slot, which is still selected iff #1 was false.
