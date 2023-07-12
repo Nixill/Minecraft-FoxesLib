@@ -23,21 +23,21 @@ module.redstoneSides = function()
     return results
 end
 
-glib.blastRedstone=function(value)
+module.blastRedstone=function(value)
   for _,v in pairs(redstone.getSides()) do
       redstone.setOutput(value)
   end
 end
 
-glib.blastAnalogRedstone=function(value)
+module.blastAnalogRedstone=function(value)
   for _,v in pairs(redstone.getSides()) do
       redstone.setAnalogOutput(value)
   end
 end
 
-glib.blastAnalogueRedstone=glib.blastAnalogRedstone
+module.blastAnalogueRedstone=module.blastAnalogRedstone
 
-glib.blastBundledRedstone=function(value)
+module.blastBundledRedstone=function(value)
   for _,v in pairs(redstone.getSides()) do
       redstone.setBundledOutput(value)
   end
