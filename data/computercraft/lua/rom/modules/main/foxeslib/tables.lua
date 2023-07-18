@@ -177,4 +177,23 @@ tables.xor = function(t1, t2)
   return results
 end
 
+tables.compress = function(source)
+  --WILL NOT NECESSARILY KEEP THE SAME ORDER
+  if type(source) ~= 'table' then return { source } end
+  local results = {}
+  for _, v in pairs(source) do
+    table.insert(results, v)
+  end
+  return results
+end
+
+tables.shuffle = function(source)
+  local results = tables.compress(tables.clone(source))
+  for i = #results, 2, -1 do
+    local j = math.random(i)
+    results[i], results[j] = results[j], results[i]
+  end
+  return results
+end
+
 return tables
