@@ -9,6 +9,6 @@ foxeslib.numbers = require('foxeslib/types/tables')
 
 foxeslib.utils = require('foxeslib/utils')
 foxeslib.cards = require('foxeslib/cards')
-
+foxeslib.betterMonitors = require('foxeslib/betterMonitor')
 
 return foxeslib
