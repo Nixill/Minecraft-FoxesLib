@@ -196,4 +196,11 @@ tables.shuffle = function(source)
   return results
 end
 
+tables.concat = function(t1, t2)
+  local t = {}
+  for _, v in ipairs(t1) do table.insert(t, v) end
+  for _, v in ipairs(t2) do table.insert(t, v) end
+  return t
+end
+
 return tables
