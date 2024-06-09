@@ -32,8 +32,8 @@ module.upgrade = function(monitor)
 
   monitor.ezBlit = function(text, textColor, backgroundColor)
     text = tostring(text)
-    bg = string.rep(colors.toBlit((backgroundColor or monitor.defaultBackground), #text))
-    fg = string.rep(colors.toBlit((textColor or monitor.defaultText)), #text)
+    bg = string.rep(colors.toBlit(backgroundColor or monitor.defaultBackground), #text)
+    fg = string.rep(colors.toBlit(textColor or monitor.defaultText), #text)
     monitor.blit(text, fg, bg)
   end
 

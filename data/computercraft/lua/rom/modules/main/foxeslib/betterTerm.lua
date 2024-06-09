@@ -30,12 +30,11 @@ module.upgrade = function(term)
     end
   end
 
-    term.ezBlit = function(text, textColor, backgroundColor)
-    text=tostring(text)
+  term.ezBlit = function(text, textColor, backgroundColor)
+    text = tostring(text)
     bg = string.rep(colors.toBlit(backgroundColor or term.defaultBackground), #text)
     fg = string.rep(colors.toBlit(textColor or term.defaultText), #text)
     term.blit(text, fg, bg)
-  end
   end
 
   term.randomColors = function()
