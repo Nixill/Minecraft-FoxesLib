@@ -1,4 +1,4 @@
-module = {}
+local module = {}
 
 module.allColors =
 { colors.white, colors.orange, colors.magenta,

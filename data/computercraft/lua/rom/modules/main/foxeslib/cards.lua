@@ -1,4 +1,4 @@
-tbl = require('foxeslib/types/tables')
+tbl = require('types/tables')
 local cards = {}
 
 

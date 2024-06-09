@@ -1,4 +1,4 @@
-module = {}
+local module = {}
 local c = require('colorUtils')
 
 
@@ -30,10 +30,11 @@ module.upgrade = function(monitor)
     end
   end
 
-  monitor.ezBlit = function(text, backgroundColor, textColor)
-    bg = string.rep(colors.toBlit(backgroundColor), #tostring(text))
-    fg = string.rep(colors.toBlit(textColor), #tostring(text))
-    monitor.blit(tostring(text), bg, fg)
+  monitor.ezBlit = function(text, textColor, backgroundColor)
+    text = tostring(text)
+    bg = string.rep(colors.toBlit((backgroundColor or monitor.defaultBackground), #text))
+    fg = string.rep(colors.toBlit((textColor or monitor.defaultText)), #text)
+    monitor.blit(text, fg, bg)
   end
 
   monitor.randomColors = function()
