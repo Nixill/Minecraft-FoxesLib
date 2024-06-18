@@ -28,4 +28,14 @@ module.pad =
       return res2
     end
 
+
+string.at = function(str, pos)
+  return str:sub(pos, pos)
+end
+
+string.compress = function(str)
+  str, _ = str:gsub(' ', '')
+  return str
+end
+
 return module

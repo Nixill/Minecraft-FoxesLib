@@ -1,0 +1,55 @@
+---An example implementation for reading ID cards using the id manager
+
+---
+-- Get the computer's access identifier string
+local id=require('modules/idManager')
+
+local found=false
+
+local speaker=peripheral.find('speaker')
+
+
+while true do
+    -- Detect when something is put into disk drive
+    local _,side=os.pullEvent('disk')
+    
+    local dr=peripheral.wrap(side)
+
+    if dr.hasData() then    -- If it can be read
+
+        -- Load disk's list of ids
+        local driveRoot=dr.getMountPath()
+        local file=fs.open(driveRoot..'/.access/.ids.secret','r')
+        found=false
+        if file then
+
+            local diskID=file.readLine()    -- Preload first line
+            
+            while diskID do
+                if diskID==id then    -- If line matches device identifier
+                    found=true
+                    break   -- No need to continue searching
+                end
+                diskID=file.readLine()    -- Move on to next id
+            end
+        end
+
+
+        if found then   -- Valid device
+            speaker.playNote('bell',3,8)
+
+            local _,side=os.pullEvent('disk_eject') -- Don't do stuff until they take out the card
+
+            print('do stuff here') -- Replace this with whatever you want it to do
+
+        else    -- Not valid device
+            speaker.playNote('didgeridoo',3,12)
+        end
+
+    else    -- If it's something that can't be read
+        speaker.playNote('bit',3,0)
+        speaker.playNote('bit',3,1)
+        speaker.playNote('bit',3,2)
+    end
+end
+----

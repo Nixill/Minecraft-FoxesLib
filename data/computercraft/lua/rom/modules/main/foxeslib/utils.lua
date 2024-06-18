@@ -11,9 +11,9 @@ module.doorHandler = function(channel, name, side)
     for k, v in pairs(name) do
       if v == true then
         results[k] = true
-      else results[tostring(v)] = true
+      else
+        results[tostring(v)] = true
       end
-
     end
   end
   name = results
@@ -25,7 +25,6 @@ module.doorHandler = function(channel, name, side)
       sleep(replyChannel)
       redstone.setOutput(side, false)
     end
-
   end
 end
 

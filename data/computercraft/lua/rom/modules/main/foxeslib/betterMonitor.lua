@@ -1,5 +1,8 @@
 local module = {}
-local c = require('colorUtils')
+if pcall(function() c = require('colorUtils') end) then
+else
+  c = require('modules/colorUtils')
+end
 
 
 
@@ -42,6 +45,11 @@ module.upgrade = function(monitor)
     local t = monitor.getTextColor()
     monitor.setPaletteColor(b, math.random(), math.random(), math.random())
     monitor.setPaletteColor(t, math.random(), math.random(), math.random())
+  end
+
+  monitor.nextLine = function()
+    local x, y = monitor.getCursorPos()
+    monitor.setCursorPos(x, y + 1)
   end
 end
 

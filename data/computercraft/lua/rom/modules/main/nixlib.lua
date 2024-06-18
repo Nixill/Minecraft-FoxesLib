@@ -24,7 +24,7 @@ module.redstoneSides = function()
 end
 
 module.div = function(a, b)
-  return {math.floor(a / b), a % b}
+  return { math.floor(a / b), a % b }
 end
 
 -- module.printPaged = function(text)
