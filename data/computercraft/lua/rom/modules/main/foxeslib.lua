@@ -12,5 +12,5 @@ foxeslib.cards = require('foxeslib/cards')
 foxeslib.betterMonitors = require('foxeslib/betterMonitor')
 foxeslib.betterTerm = require('foxeslib/betterTerm')
 foxeslib.random = require('foxeslib/random')
-
+foxeslib.crypto = require('foxeslib/crypto')
 return foxeslib
